@@ -1,12 +1,12 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header height="120px" style="padding: 0">
+      <el-header height="120px" style="padding: 0;">
         <el-row>
           <el-col :span="24">
             <el-row>
               <el-col :span="2" :offset="10">
-                <el-image src="/melody.png" style="width: 90px; height: 90px" />
+                <el-image src="/melody.png?v1" style="width: 90px; height: 90px" />
               </el-col>
               <el-col :span="5" style="text-align: left; margin-top: 28px">
                 <el-row>
@@ -261,6 +261,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 3px;
+  background: #f1f1f1;
+}
+
+.common-layout {
+  min-height: 100vh;
+  background: #fff;
+  width: 1200px;
+  margin: auto;
 }
 
 .nav span {

@@ -1,5 +1,10 @@
 <template>
-  <el-table :data="searchResult" :stripe="true">
+  <el-table :data="searchResult" :stripe="true" 
+  	v-loading="loading"
+	:element-loading-text="searchTip"
+	element-loading-background="rgba(0, 0, 0, 0.8)"
+	style="min-height: 300px;border-radius: 5px;"
+	>
     <el-table-column type="index" width="50" />
     <el-table-column label="歌曲" width="300">
       <template #default="scope">
@@ -100,9 +105,18 @@ export default {
       type: String,
       required: false,
     },
+    searchTip: {
+      type: String,
+      required: false,
+    },
     searchResult: {
       type: Array,
       required: true,
+    },
+    loading: {
+      type: Boolean,
+      required: false,
+	  default: true
     },
   },
   mounted() {

@@ -1,6 +1,6 @@
 <template>
   <el-main style="margin: 0 auto">
-    <el-row justify="center">
+    <el-row justify="center" style="width: 1070px;">
       <el-col :span="16">
         <el-row>
           <el-col :span="20">
@@ -22,14 +22,14 @@
     </el-row>
 
     <!-- 搜索提示 -->
-    <el-row>
+    <!-- <el-row>
       <el-col :span="12" :offset="3">
-        <div style="float: left; margin-top: 3px">
+        <div style="float: left; margin-top: 20px">
           <span style="font-size: 22px"> {{ searchTip }} </span>
           <span style="font-size: 22px" v-loading="isSearching"></span>
         </div>
       </el-col>
-    </el-row>
+    </el-row> -->
 
     <!-- 精准搜索卡片 -->
     <el-row v-if="songMetaInfo !== null">
@@ -175,6 +175,8 @@
         :abortTheSong="abortTheSong"
         :suggestMatchSongId="suggestMatchSongId"
         :searchResult="searchResult"
+		:loading="isSearching"
+		:searchTip="searchTip"
       >
       </SearchResultTable>
     </el-row>

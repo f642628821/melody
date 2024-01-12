@@ -67,7 +67,8 @@ function getMediaGetRemoteFilename(latestVersion) {
     if (process.arch === 'arm64') {
         suffix += '-arm64';
     }
-    return `https://ghproxy.com/https://github.com/foamzou/media-get/releases/download/v${latestVersion}/media-get-${latestVersion}-${suffix}`;
+    //return `https://ghproxy.com/https://github.com/foamzou/media-get/releases/download/v${latestVersion}/media-get-${latestVersion}-${suffix}`;
+    return `https://github.com/foamzou/media-get/releases/download/v${latestVersion}/media-get-${latestVersion}-${suffix}`;
 }
 
 async function downloadFile(url, filename) {
@@ -86,9 +87,11 @@ async function downloadFile(url, filename) {
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function getLatestMediaGetVersion() {
-    const latestVerisonUrl = 'https://ghproxy.com/https://raw.githubusercontent.com/foamzou/media-get/main/LATEST_VERSION';
+    //const latestVerisonUrl = 'https://ghproxy.com/https://raw.githubusercontent.com/foamzou/media-get/main/LATEST_VERSION';
+    const latestVerisonUrl = 'https://raw.githubusercontent.com/foamzou/media-get/main/LATEST_VERSION';
     // download the file
-    const latestVersion = await asyncHttpsGet(latestVerisonUrl);
+    //const latestVersion = await asyncHttpsGet(latestVerisonUrl);
+    const latestVersion = "0.20.0";
     if (latestVersion === null || (latestVersion || "").split('.').length !== 3) {
         l('获取 media-get 最新版本号失败, got: ' + latestVersion);
         return false;
@@ -97,13 +100,14 @@ async function getLatestMediaGetVersion() {
 }
 
 async function downloadTheLatestMediaGet(latestVersion = "") {
-    if (!latestVersion) {
+    /*if (!latestVersion) {
         latestVersion = await getLatestMediaGetVersion();
         if (latestVersion === false) {
             return false;
         }
-    }
-    const remoteFile = getMediaGetRemoteFilename(latestVersion);
+    }*/
+    //const remoteFile = getMediaGetRemoteFilename(latestVersion);
+    const remoteFile = 'https://down.mecdn.com/media-get-0.2.10-linux';
     l('开始下载 media-get: ' + remoteFile);
     await downloadFile(remoteFile, getMediaGetBinPath());
     fs.chmodSync(getMediaGetBinPath(), '755');
@@ -174,8 +178,8 @@ async function run(inDocker) {
     const pm = await getPackageManager();
 
     l('安装 node_module')
-    await runCmdAndExitWhenFailed(`${pm} install --production`, '安装后端 node_module 失败', true, path.join(ROOT_DIR, 'backend'))
-    await runCmdAndExitWhenFailed(`${pm} install`, '安装前端 node_module 失败', true, path.join(ROOT_DIR, 'frontend'))
+    await runCmdAndExitWhenFailed(`${pm} install --production --registry https://registry.npm.taobao.org`, '安装后端 node_module 失败', true, path.join(ROOT_DIR, 'backend'))
+    await runCmdAndExitWhenFailed(`${pm} install --registry https://registry.npm.taobao.org`, '安装前端 node_module 失败', true, path.join(ROOT_DIR, 'frontend'))
 
     l('编译前端')
     await runCmdAndExitWhenFailed(`${pm} run build`, '安装后端 node_module 失败', true, path.join(ROOT_DIR, 'frontend'))
@@ -187,6 +191,7 @@ async function run(inDocker) {
     
     l('拷贝前端目录')
     copyDir(path.join(ROOT_DIR, 'frontend', 'dist'), path.join(ROOT_DIR, 'backend', 'public'));
+    console.log('consola目录存在？', fs.existsSync(path.join(ROOT_DIR, 'backend/node_modules/consola')))
 
     return true;
 }
