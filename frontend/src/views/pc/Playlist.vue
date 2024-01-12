@@ -218,7 +218,7 @@ export default {
       searchTip: "",
       showSearchPage: false,
       tableKey: 1,
-      showBlockSongsOnly: true,
+      showBlockSongsOnly: false,
       tableFilterValues: ["blocked"],
       playlists: [],
       playlistDetail: {},
