@@ -2,7 +2,7 @@
 
 ## 项目介绍
 
-<img src="./imgs/melody.png" width="100" ></img>
+<img src="./frontend/public/melody.png" width="100" ></img>
 
 大家好，我叫 Melody，你的音乐精灵，旨在帮助你更好地管理音乐。目前的主要能力是帮助你将喜欢的歌曲或者音频上传到音乐平台的云盘。
 
