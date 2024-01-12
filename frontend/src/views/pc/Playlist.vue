@@ -20,7 +20,7 @@
         </div>
       </el-scrollbar>
     </el-aside>
-    <el-main style="padding: 0; margin-left: 30px">
+    <el-main style="padding: 0;">
       <el-dialog v-model="showSearchPage" width="1080px" center>
         <el-scrollbar class="search-scollbar">
           <p v-if="this.searchTip" style="font-size: 20px; text-align: center">

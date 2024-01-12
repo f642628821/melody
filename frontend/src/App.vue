@@ -267,7 +267,7 @@ export default {
 .common-layout {
   min-height: 100vh;
   background: #fff;
-  width: 1200px;
+  width: 1600px;
   margin: auto;
 }
 
